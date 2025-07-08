@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LetzGo - Offer a Ride</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+    }
+
+    .logo {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-box {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      padding: 40px 30px;
+      max-width: 420px;
+      width: 100%;
+      animation: fadeIn 0.7s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #fff;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    .input-group input:focus {
+      border-color: #00cec9;
+      transform: scale(1.02);
+      transition: all 0.2s ease;
+    }
+
+    .submit-btn {
+      background-color: #fff;
+      color: #00b894;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    #message {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: 600;
+      color: #ffcccb;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 0.9rem;
+      backdrop-filter: blur(10px);
+    }
+
+    @media (max-width: 480px) {
+      .form-box {
+        padding: 30px 20px;
+      }
+
+      .logo {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">LetzGo <i class="fas fa-bicycle"></i></div>
+
+  <div class="form-box">
+    <h2>Offer a Ride</h2>
+    <form id="offerRideForm">
+      <div class="input-group">
+        <label for="from">From</label>
+        <input type="text" id="from" name="from" placeholder="Pickup location" required>
+      </div>
+      <div class="input-group">
+        <label for="to">To</label>
+        <input type="text" id="to" name="to" placeholder="Destination" required>
+      </div>
+      <div class="input-group">
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+      <div class="input-group">
+        <label for="time">Time</label>
+        <input type="time" id="time" name="time" required>
+      </div>
+      <div class="input-group">
+        <label for="price">Price (₹)</label>
+        <input type="number" id="price" name="price" placeholder="Enter price" required min="0">
+      </div>
+      <button type="submit" class="submit-btn">Post Ride</button>
+      <p id="message"></p>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2025 LetzGo. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("offerRideForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const from = document.getElementById("from").value;
+      const to = document.getElementById("to").value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      const price = document.getElementById("price").value;
+
+      // Save ride details in localStorage
+      localStorage.setItem("postedRide", JSON.stringify({ from, to, date, time,price }));
+
+      // Redirect to dashboard
+      window.location.href = "driver-confirmation.html";
+    });
+  </script>
+</body>
+</html>

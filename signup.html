@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LetzGo - Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+    }
+
+    .logo {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .signup-box {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      padding: 40px 30px;
+      max-width: 420px;
+      width: 100%;
+      animation: fadeIn 0.7s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .signup-box h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #fff;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    .input-group input:focus {
+      border-color: #00cec9;
+      transform: scale(1.02);
+      transition: all 0.2s ease;
+    }
+
+    .signup-btn {
+      background-color: #fff;
+    
+      color: #4facfe;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .signup-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .login-link {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .login-link a {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    .password-strength {
+      font-size: 0.85rem;
+      margin-top: 6px;
+    }
+
+    .weak { color: #ff4d4d; }
+    .medium { color: #ffc107; }
+    .strong { color: #00e676; }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 0.9rem;
+      backdrop-filter: blur(10px);
+    }
+
+    @media (max-width: 480px) {
+      .signup-box {
+        padding: 30px 20px;
+      }
+
+      .logo {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">LetzGo <i class="fas fa-bicycle"></i></div>
+
+  <div class="signup-box">
+    <h2>Create Your Account</h2>
+    <form id="signupForm">
+      <div class="input-group">
+        <label for="name">Username</label>
+        <input type="text" id="name" name="name" placeholder="Create your username" required>
+      </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="input-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create a password" required>
+        <div id="password-strength" class="password-strength"></div>
+      </div>
+      <div class="input-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+      </div>
+
+      <button type="submit" class="signup-btn">Sign Up</button>
+    </form>
+    <p class="login-link">Already have an account? <a href="login.html">Log in</a></p>
+  </div>
+
+  <footer>
+    &copy; 2025 LetzGo. All rights reserved.
+  </footer>
+
+  <script>
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirm-password');
+    const passwordStrength = document.getElementById('password-strength');
+
+    passwordInput.addEventListener('input', function () {
+      const value = passwordInput.value;
+      if (value.length < 6) {
+        passwordStrength.textContent = 'Weak password';
+        passwordStrength.className = 'password-strength weak';
+      } else if (value.match(/[A-Z]/) && value.match(/[0-9]/) && value.length >= 8) {
+        passwordStrength.textContent = 'Strong password';
+        passwordStrength.className = 'password-strength strong';
+      } else {
+        passwordStrength.textContent = 'Medium strength';
+        passwordStrength.className = 'password-strength medium';
+      }
+    });
+
+    // Optional: Prevent form submission for now
+    document.getElementById('signupForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert("Form submitted! (Functionality coming soon)");
+    });
+  </script>
+</body>
+</html>

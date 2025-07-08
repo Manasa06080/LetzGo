@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ride Confirmed - LetzGo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #2980b9, #6dd5fa);
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+    }
+
+    .logo {
+      font-family: 'Pacifico', cursive;
+      font-size: 2rem;
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      color: #fff;
+    }
+
+    .confirmation-box {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 30px 25px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      width: 100%;
+      animation: popIn 0.7s ease-in-out;
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .confirmation-box h2 {
+      margin-bottom: 15px;
+    }
+
+    .details {
+      margin-top: 20px;
+      text-align: left;
+      font-size: 1rem;
+    }
+
+    .details p {
+      margin: 8px 0;
+    }
+
+    .dashboard-btn {
+      margin-top: 30px;
+      background-color: #fff;
+      color: #00b894;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .dashboard-btn:hover {
+      background-color: #f1f1f1;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 500px) {
+      .confirmation-box {
+        padding: 25px 20px;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        left: 20px;
+        top: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">LetzGo</div>
+
+  <div class="confirmation-box">
+    <h2>Ride Posted Successfully!</h2>
+    <div class="details" id="rideDetails"></div>
+
+    <button class="dashboard-btn" onclick="goToDashboard()">Go to Dashboard</button>
+  </div>
+
+  <script>
+    function goToDashboard() {
+      window.location.href = "driver_dashboard.html";
+    }
+
+    // Show ride details
+    const rideData = JSON.parse(localStorage.getItem("postedRide"));
+    const rideDetailsDiv = document.getElementById("rideDetails");
+
+    if (rideData) {
+      rideDetailsDiv.innerHTML = `
+        <p><strong>From:</strong> ${rideData.from}</p>
+        <p><strong>To:</strong> ${rideData.to}</p>
+        <p><strong>Date:</strong> ${rideData.date}</p>
+        <p><strong>Time:</strong> ${rideData.time}</p>
+        <p><strong>Price:</strong> ₹${rideData.price}</p>
+      `;
+    } else {
+      rideDetailsDiv.innerHTML = "<p>No ride information found.</p>";
+    }
+  </script>
+
+</body>
+</html>

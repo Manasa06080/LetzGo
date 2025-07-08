@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ride Confirmation - LetzGo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #2980b9, #6dd5fa);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      color: #fff;
+    }
+
+    .confirmation-box {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      animation: slideIn 0.6s ease;
+    }
+
+    .confirmation-box h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      font-family: 'Pacifico', cursive;
+    }
+
+    .details {
+      text-align: left;
+      margin: 20px 0;
+    }
+
+    .details p {
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .home-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: #fff;
+      color: #00b894;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .home-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .map-container {
+  margin-top: 30px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.map-container img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+}
+  </style>
+</head>
+<body>
+
+  <div class="confirmation-box">
+    <h2>Ride Confirmed!</h2>
+    <div class="details">
+      <p><strong>Pickup:</strong> <span id="pickup"></span></p>
+      <p><strong>Drop:</strong> <span id="drop"></span></p>
+      <p><strong>Date:</strong> <span id="date"></span></p>
+      <p><strong>Time:</strong> <span id="time"></span></p>
+      <p><strong>Vehicle Type:</strong> <span id="vehicle"></span></p>
+    </div>
+    <div class="map-container">
+      <img src="https://maps.googleapis.com/maps/api/staticmap?center=Hyderabad,India&zoom=12&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7CHyderabad,India" alt="Map showing ride route" />
+    </div>
+    
+    
+    
+    
+    <a class="home-link" href="homepage2.html">Back to Home</a>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const booking = JSON.parse(localStorage.getItem("booking"));
+
+      if (booking) {
+        document.getElementById("pickup").textContent = booking.pickup;
+        document.getElementById("drop").textContent = booking.drop;
+        document.getElementById("date").textContent = booking.date;
+        document.getElementById("time").textContent = booking.time;
+        document.getElementById("vehicle").textContent = booking.vehicle;
+      } else {
+        document.querySelector(".confirmation-box").innerHTML = `
+          <h2>No Booking Found</h2>
+          <p>Please <a class="home-link" href="ride booking.html">book a ride</a> first.</p>
+        `;
+      }
+    });
+  </script>
+
+</body>
+</html>
